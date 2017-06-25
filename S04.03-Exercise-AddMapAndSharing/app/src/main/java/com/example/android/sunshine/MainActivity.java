@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -221,7 +222,23 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
+        // COMPLETED (2) Launch the map when the map menu item is clicked
+        if (id == R.id.action_open_map) {
+            Uri.Builder theBuilder = new Uri.Builder();
+
+            Uri theUri = theBuilder.scheme("geo")
+                .appendPath("0,0")
+                .appendQueryParameter("q","Jakarta")
+                .build();
+
+            Intent i = new Intent();
+            i.setAction(Intent.ACTION_VIEW);
+            i.setData(theUri);
+
+            startActivity(i);
+
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
